@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Domain</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
+
+        iframe {
+            background: #000;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            width: 100%;
+            height: 150px;
+            background: rgba(0 0 0 / 0.6);
+        }
+
+        .main {
+            flex: 1 1 auto;
+        }
+
+        .main__container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .footer {
+            width: 100%;
+            height: 150px;
+            background: rgba(0 0 0 / 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="header"></div>
+
+    <main class="main">
+        <div class="container main__container">
+            <h1>Test Domain</h1>
+
+            <iframe
+                src="https://cardstorm.io/widget/?product_ids=634565,635145,635658,635469,634898&ref=LocalTestPartner&public_key=88ca9n4828SbE8cPUOIKA897dsA9dsaF"
+                frameborder="0"
+                width="100%"
+                height="370px"
+                scrolling="no"
+                allowtransparency="true"
+                id="cardstorm-widget"
+            ></iframe>
+
+            <script>
+                const iframe = document.getElementById('cardstorm-widget');
+
+                const widgetThemeVars = {
+                    // '--cw-font-primary': 'Times New Roman, serif',
+                };
+
+                iframe.addEventListener('load', () => {
+                    iframe.contentWindow.postMessage({ widgetThemeVars }, 'https://tsereteliph.github.io/');
+                });
+
+                window.addEventListener('message', function (e) {
+                    if (!iframe) return;
+
+                    if (e.data?.widgetHeight) {
+                        iframe.style.height = e.data.widgetHeight + 'px';
+                    }
+                });
+            </script>
+        </div>
+    </main>
+
+    <div class="footer"></div>
+</body>
+</html>
